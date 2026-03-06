@@ -1,1 +1,27 @@
 <h1>Tasks</h1>
+
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{ form }}
+
+    <input class="btn btn-info" type="submit" value="Create Task" >
+</form>
+
+{% for task in tasks %}
+    <hr>
+    <div style="font-size:16px !important;">
+        <p>{{ task.title }}</p>
+    </div>
+    <p>Status:
+        {% if task.completed %} 
+            Completed
+        {% else %}
+            Pending
+        {% endif %}
+    </p>
+    <p>{{ task.created }}</p>
+    <p>
+        <a href="{% url 'update-task' task.id %}"> Update</a>
+        <a href="{% url 'delete-task' task.id %}"> Delete</a>
+    </p>
+{% endfor %}

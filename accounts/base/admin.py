@@ -31,6 +31,15 @@ class BaseCustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
 
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("username", "password1", "password2"),
+            },
+        ),
+    )
     fieldsets = UserAdmin.fieldsets + ((None, {"fields": ["tel"]}),)
     #add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ["tel"]}),)
 

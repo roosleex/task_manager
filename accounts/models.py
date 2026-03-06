@@ -1,10 +1,10 @@
-from simple_history.models import HistoricalRecords
+# from simple_history.models import HistoricalRecords
 from .base.models import BaseUser, BaseUserGroup
 
 
 
 class User(BaseUser):
-    history = HistoricalRecords()
+    # history = HistoricalRecords()
 
     class Meta(BaseUser.Meta):
         # add custom permissions
@@ -25,4 +25,5 @@ class User(BaseUser):
 
 
 class UserGroup(BaseUserGroup):
-    history = HistoricalRecords()
+    # history = HistoricalRecords()
+    pass
