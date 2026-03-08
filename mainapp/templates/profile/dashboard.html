@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Task manager</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <div class="text-center">
+        <h2>Hello, I am your Task manager!</h2>
+        <h2>Tasks</h2>
+    </div>
+    <div class="container bg-white shadow-md p-5 form-layout">
+        {% for task in tasks %}
+            <hr>
+            <div style="font-size:16px !important;">
+                <p>{{ task.title }}</p>
+            </div>
+            <p>Status:
+                {% if task.completed %} 
+                    Completed
+                {% else %}
+                    Pending
+                {% endif %}
+            </p>
+            <p>{{ task.created }}</p>
+            <p>
+                <a href="{% url 'update-task' task.id %}"> Update</a>
+                <a href="{% url 'delete-task' task.id %}"> Delete</a>
+            </p>
+        {% endfor %}
+    </div>    
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

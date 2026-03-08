@@ -1,0 +1,29 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Task manager</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <div class="container bg-white shadow-md p-5">
+        <h2>Login</h2>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.username|as_crispy_field }}
+            <br>
+            {{ form.password|as_crispy_field }}
+            <br>
+            <input class="btn btn-info" type="submit" value="Login" >
+        </form>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
