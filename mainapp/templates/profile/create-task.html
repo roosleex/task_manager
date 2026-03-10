@@ -1,8 +1,26 @@
-<h1>Create Task</h1>
+{% load static %}
+{% load crispy_forms_tags %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{ form }}
-    <input class="btn btn-info" type="submit" value="Create Task" >
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Task manager</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    {% include 'nav.html' %}
+    <h2 class="text-center">Create Task</h2>
+    <div class="container bg-white shadow-md p-1">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn btn-success" type="submit" value="Create Task" >
+        </form>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
 

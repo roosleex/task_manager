@@ -11,7 +11,7 @@
 <body>
     {% include 'nav.html' %}
     <div class="text-center">
-        <h2>Today's Tasks</h2>
+        <h2>All Tasks</h2>
         <div class="d-flex justify-content-center w-100">
             {% if tasks %}
                 {% for task in tasks %}
@@ -35,7 +35,7 @@
                     </div>      
                 {% endfor %}
             {% else %}
-                <h3>Sorry, No tasks for today</h3>
+                <h3>Sorry, No tasks</h3>
                 <div class="mt-4">
                     <a class="btn btn-info" href="{% url 'create-task' %}">New Task</a>
                 </div>      

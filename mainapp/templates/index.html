@@ -6,11 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>Task manager</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     {% include 'nav.html' %}
-    <div class="text-center">
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
         <h2>Hello, I am your Task manager!</h2>
     </div>
 
