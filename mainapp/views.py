@@ -141,7 +141,7 @@ def all_tasks(request):
     # today = timezone.now().date()
     user = request.user
     # print(f"user = {user.id}")
-    tasks = Task.objects.all().filter(user=user)
+    tasks = Task.objects.all().filter(user=user).order_by("-id")
 
     context = {
         "tasks": tasks,
