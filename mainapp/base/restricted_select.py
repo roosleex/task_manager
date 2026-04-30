@@ -46,7 +46,7 @@ class BoundRestrictedModelChoiceField(forms.BoundField):
         return attrs
 
 
-
+ 
 class RestrictedModelChoiceField(forms.ModelChoiceField):
     widget = RestrictedSelect
 
@@ -92,33 +92,54 @@ class RestrictedModelChoiceField(forms.ModelChoiceField):
     def get_bound_field(self, form, field_name):
         return BoundRestrictedModelChoiceField(form, self, field_name)
     
-    
-    
-# Helpful methods for form restricted selects
-class Helper():
 
-    def is_form_init_instance(obj):
-        """
-        Check out if there is an instance in form's __init__ method
-        obj : form's self
-            form's __init__ self param
-        """
-        return obj.instance.pk
+
+# # BoundRestrictedModelChoiceField for a CemeteryPlace with free status
+# class BoundRestrictedModelChoiceFieldFreeCemeteryPlace(BoundRestrictedModelChoiceField):
+#     def build_widget_attrs(self, attrs, widget=None):
+#         attrs = super().build_widget_attrs(attrs, widget)
+#         # Flag that current select contains only rows of CemeteryPlaces with free status
+#         attrs["is_select_free_cemetery_place"] = self.field.is_select_free_cemetery_place
+#         return attrs
+
+
+
+# # RestrictedModelChoiceField for a CemeteryPlace with free status
+# class RestrictedModelChoiceFieldFreeCemeteryPlace(RestrictedModelChoiceField):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.is_select_free_cemetery_place = True
+
+#     def get_bound_field(self, form, field_name):
+#         return BoundRestrictedModelChoiceFieldFreeCemeteryPlace(form, self, field_name)
     
-    def is_form_init_after_save(args):
-        """
-        Check out if form's __init__ method is in after save state
-        args : tuple
-            form's __init__ args param
-        """
-        return len(args) != 0
     
-    def is_form_init_before_save(args):
-        """
-        Check out if form's __init__ method is in before save state
-        args : tuple
-            form's __init__ args param
-        """
-        #print(f"len(args) = {len(args)}")
-        #print(f"args = {args}")
-        return len(args) == 0
+
+# # Helpful methods for form restricted selects
+# class Helper():
+
+#     def is_form_init_instance(obj):
+#         """
+#         Check out if there is an instance in form's __init__ method
+#         obj : form's self
+#             form's __init__ self param
+#         """
+#         return obj.instance.pk
+    
+#     def is_form_init_after_save(args):
+#         """
+#         Check out if form's __init__ method is in after save state
+#         args : tuple
+#             form's __init__ args param
+#         """
+#         return len(args) != 0
+    
+#     def is_form_init_before_save(args):
+#         """
+#         Check out if form's __init__ method is in before save state
+#         args : tuple
+#             form's __init__ args param
+#         """
+#         #print(f"len(args) = {len(args)}")
+#         #print(f"args = {args}")
+#         return len(args) == 0

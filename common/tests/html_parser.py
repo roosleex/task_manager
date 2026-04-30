@@ -60,12 +60,12 @@ class HtmlParserTests(TestCase):
     def test_get_select_selected_value(self):
         actual = get_select_selected_value(self.html, "id_empty_cemetery_place")
         expected = "937"
-        self.assertEqual(actual, expected)
+        self.assertEquals(actual, expected)
         #
         actual = get_select_selected_value(self.html2, "id_empty_cemetery_place2")
         expected = "245"
-        self.assertEqual(actual, expected)
+        self.assertEquals(actual, expected)
         #
         actual = get_select_selected_value(self.html3, "id_empty_cemetery_place3")
         expected = ""
-        self.assertEqual(actual, expected)
+        self.assertEquals(actual, expected)

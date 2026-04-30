@@ -1,16 +1,16 @@
 from django.contrib import admin
-from simple_history.admin import SimpleHistoryAdmin
 from django.conf import settings
 from mainapp.apps import MainappConfig
 from accounts.apps import AccountsConfig
 from reports.apps import ReportsConfig
 from reports.admin import get_reports_app_list
 from django.apps import apps
+from simple_history.admin import SimpleHistoryAdmin
 
 
-
+ 
 def get_app_list_item(name, object_name, app_url):
-    from mainapp.admin.sites import MainappAdminSite
+    # from mainapp.admin.sites import MainappAdminSite
     return [{
         #"model": "",
         "name": name, 

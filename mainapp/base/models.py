@@ -36,3 +36,5 @@ class BaseModel(models.Model):
         Get model settings
         """
         return None
+    
+    

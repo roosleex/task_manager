@@ -1,7 +1,11 @@
+# Utilities for dates
+
 from django.contrib import admin
 from django.apps import apps
 import datetime
 from dateutil.relativedelta import relativedelta
+import calendar
+from datetime import date
 
 
 
@@ -15,7 +19,7 @@ def conv_str_to_datetime(d_str: str, format: str) -> datetime:
     """
     result = ""
 
-    if d_str == "" or d_str == -1 or d_str == "-1" or format == "":
+    if d_str == "" or d_str == -1 or d_str == "-1" or format == "" or d_str == None:
         return result
     result = datetime.datetime.strptime(d_str, format)
     return result
@@ -62,6 +66,52 @@ def get_years_difference(start_date, end_date) -> int:
         # result = round(result)
         result = relativedelta(end_date, start_date).years
     return result
+
+
+
+def get_month_min_datetime(month: str) -> datetime:
+    """
+    Get minimal datetime in a month
+    month: str
+        target month in format YYYY-MM
+    """
+    year, month = month.split("-")
+    return datetime.datetime(int(year), int(month), 1, 0, 0, 0)
+
+
+
+def get_month_max_datetime(month: str) -> datetime:
+    """
+    Get maximal datetime in a month
+    month: str
+        target month in format YYYY-MM
+    """
+    year, month = month.split("-")
+    days_in_month = calendar.monthrange(int(year), int(month))[1]
+    return datetime.datetime(int(year), int(month), int(days_in_month), 23, 59, 59)
+
+
+
+def get_month_min_date(month: str) -> date:
+    """
+    Get minimal date in a month
+    month: str
+        target month in format YYYY-MM
+    """
+    year, month = month.split("-")
+    return date(int(year), int(month), 1)
+
+
+
+def get_month_max_date(month: str) -> date:
+    """
+    Get maximal date in a month
+    month: str
+        target month in format YYYY-MM
+    """
+    year, month = month.split("-")
+    days_in_month = calendar.monthrange(int(year), int(month))[1]
+    return date(int(year), int(month), int(days_in_month))
 
 
 

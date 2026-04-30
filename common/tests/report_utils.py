@@ -27,7 +27,7 @@ class ReportUtilsTests(SimpleTestCase):
         ]
         actual = get_report_title_from_app_list(app_list, "license_plate_recognition")
         expected = "Звіт розпізнаних номерних знаків"
-        self.assertEqual(actual, expected)
+        self.assertEquals(actual, expected)
 
 
         app_list = [
@@ -62,7 +62,7 @@ class ReportUtilsTests(SimpleTestCase):
         ]
         actual = get_report_title_from_app_list(app_list, "license_plate_recognition")
         expected = "Звіт розпізнаних номерних знаків"
-        self.assertEqual(actual, expected)
+        self.assertEquals(actual, expected)
 
 
         app_list = [
@@ -95,7 +95,7 @@ class ReportUtilsTests(SimpleTestCase):
         ]
         actual = get_report_title_from_app_list(app_list, "license_plate_recognition")
         expected = ""
-        self.assertEqual(actual, expected)
+        self.assertEquals(actual, expected)
 
 
         app_list = [
@@ -128,12 +128,10 @@ class ReportUtilsTests(SimpleTestCase):
         ]
         actual = get_report_title_from_app_list(app_list, "license_plate_recognition3")
         expected = "Звіт розпізнаних номерних знаків3"
-        self.assertEqual(actual, expected)
+        self.assertEquals(actual, expected)
 
         
         
        
-
-
 
     

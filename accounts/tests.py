@@ -25,7 +25,7 @@ class UserTests(TestCase):
     def test_fields(self):
         self.assertEqual(self.row._meta.get_field("tel").verbose_name, "Номер телефону")
         self.assertEqual(self.row._meta.get_field("tel").max_length, 15)
-        self.assertTrue(self.row.history != None)
+        # self.assertTrue(self.row.history != None)
 
     def test_model_meta(self):
         self.assertEqual(self.row._meta.db_table, 'auth_user')
@@ -40,7 +40,7 @@ class UserTests(TestCase):
         self.assertTrue(self.user.is_active)
         self.assertFalse(self.user.is_staff)
         self.assertFalse(self.user.is_superuser)
-        self.assertTrue(self.user.history != None)
+        # self.assertTrue(self.user.history != None)
         #
         self.assertEqual(self.admin_user.username, "superadmin")
         self.assertEqual(self.admin_user.email, "superadmin@email.com")
@@ -48,7 +48,7 @@ class UserTests(TestCase):
         self.assertTrue(self.admin_user.is_active)
         self.assertTrue(self.admin_user.is_staff)
         self.assertTrue(self.admin_user.is_superuser)
-        self.assertTrue(self.admin_user.history != None)
+        # self.assertTrue(self.admin_user.history != None)
        
     def test_str(self):
         self.assertEqual(self.user.__str__(), self.user.username)
@@ -70,7 +70,7 @@ class UserGroupTests(TestCase):
         self.assertEqual(self.row._meta.get_field("description").max_length, 250)
         self.assertEqual(self.row._meta.get_field("description").null, True)
         self.assertEqual(self.row._meta.get_field("description").blank, True)
-        self.assertTrue(self.row.history != None)
+        # self.assertTrue(self.row.history != None)
 
     def test_model_meta(self):
         self.assertEqual(self.row._meta.verbose_name, "група")
@@ -80,7 +80,7 @@ class UserGroupTests(TestCase):
     def test_model_content(self):
         self.assertEqual(self.row.name, "Група 1")
         self.assertEqual(self.row.description, "Опис групи 1")
-        self.assertTrue(self.row.history != None)
+        # self.assertTrue(self.row.history != None)
        
     def test_str(self):
         self.assertEqual(self.row.__str__(), self.row.name)

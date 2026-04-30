@@ -1,4 +1,4 @@
-# Utilities for numbers
+# Utilities for reports
 
 
 
@@ -19,9 +19,6 @@ def get_report_title_from_app_list(app_list: list, name: str) -> str:
         if result:
             break
     return result
-
-
-
 
 
 

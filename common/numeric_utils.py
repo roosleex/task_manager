@@ -31,7 +31,7 @@ def get_fraction_digits_quantity(value):
     
 
 
-def num_to_string(num) -> float:
+def num_to_string(num) -> str:
     """
     Convert number to string
     num: number
@@ -40,7 +40,7 @@ def num_to_string(num) -> float:
 
 
 
-def money_to_string(num) -> float:
+def money_to_string(num) -> str:
     """
     Convert money number to string
     num: number
@@ -49,12 +49,20 @@ def money_to_string(num) -> float:
 
 
 
-def ukrainian_number_to_text(n, gender="m"):
+def ukrainian_number_to_text(n, gender="m") -> str:
     """
     Convert integer n to Ukrainian text.
     gender: "m" (masculine) or "f" (feminine, e.g., для 'гривня')
     Works for 0-999
     """
+    try:
+        n = int(n)
+    except (ValueError, TypeError):
+        return ""
+
+    if n < 0 or n > 999:
+        return ""
+
     units = {
         "m": ["", "один", "два", "три", "чотири", "п'ять", "шість", "сім", "вісім", "дев'ять"],
         "f": ["", "одна", "дві", "три", "чотири", "п'ять", "шість", "сім", "вісім", "дев'ять"]
@@ -105,11 +113,19 @@ def get_ukrainian_number_form(n, forms):
     return forms[2]
 
 
-def money_to_ukr_text(amount):
+def money_to_ukr_text(amount) -> str:
     """
     Convert float amount to Ukrainian text with correct word forms.
     Example: 105.78 -> "сто п'ять гривень 78 копійок"
     """
+    
+    try:
+        # amount is OK
+        amount = float(amount)
+    except (ValueError, TypeError):
+        return ""
+
+
     hryvnias = int(amount)
     kopecks = round((amount - hryvnias) * 100)
 
@@ -133,13 +149,15 @@ def money_to_ukr_text(amount):
     if hryvnias > 0:
         result.append(ukrainian_number_to_text(hryvnias, gender="f"))
     result.append(get_ukrainian_number_form(hryvnias, ["гривня", "гривні", "гривень"]))
+    
+    if hryvnias == 0 and (len(result) == 1):
+        result[0] = f"нуль {result[0]}"
 
     # Kopecks
     kopecks_text = f"{kopecks:02d}"
     result.append(f"{kopecks_text} {get_ukrainian_number_form(kopecks, ['копійка', 'копійки', 'копійок'])}")
 
     return " ".join(result)
-
 
 
 

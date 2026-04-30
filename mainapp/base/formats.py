@@ -43,7 +43,7 @@ def _insert_line_breaks(text, words_per_line=2):
     return "\n".join(lines)
 
 
-
+ 
 class PDF(Format):
     """Custom PDF export format for django-import-export"""
 

@@ -13,34 +13,36 @@ def get_choices_empty_default():
 
 
 class FullDate(forms.DateField):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault("required", False)
+    def __init__(self, *args, label="Дата", required=False, **kwargs):
+        kwargs.setdefault("label", label)
+        kwargs.setdefault("required", required)
         kwargs.setdefault("widget", forms.TextInput(attrs={'type':'date'}))
         super().__init__(*args, **kwargs)
 
 
 
 class FullDateMin(forms.DateField):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault("label", "Дата початкова")
-        kwargs.setdefault("required", False)
+    def __init__(self, *args, label="Дата початкова", required=False, **kwargs):
+        kwargs.setdefault("label", label)
+        kwargs.setdefault("required", required)
         kwargs.setdefault("widget", forms.TextInput(attrs={'type':'date'}))
         super().__init__(*args, **kwargs)
 
 
 
 class FullDateMax(forms.DateField):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault("label", "Дата кінцева")
-        kwargs.setdefault("required", False)
+    def __init__(self, *args, label="Дата кінцева", required=False, **kwargs):
+        kwargs.setdefault("label", label)
+        kwargs.setdefault("required", required)
         kwargs.setdefault("widget", forms.TextInput(attrs={'type':'date'}))
         super().__init__(*args, **kwargs)
 
 
 
 class AllModelsNames(forms.ChoiceField):
-    def __init__(self, app_label, *args, **kwargs):
-        kwargs.setdefault("label", "Довідник")
+    def __init__(self, app_label, *args, label="Довідник", **kwargs):
+        kwargs.setdefault("label", label)
+        kwargs.setdefault("required", True)
         choices = self.get_model_choices(app_label)
         super().__init__(choices=choices, *args, **kwargs)
 
@@ -79,9 +81,9 @@ class MonthInput(forms.TextInput):
 
 
 class MonthDate(forms.DateField):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault("required", False)
-        kwargs.setdefault("label", "Місяць")
+    def __init__(self, *args, label="Місяць", required=False, **kwargs):
+        kwargs.setdefault("label", label)
+        kwargs.setdefault("required", required)
         kwargs.setdefault("widget", MonthInput())
         # kwargs.setdefault(
         #     "widget",
@@ -119,7 +121,7 @@ class CustomSelect(forms.ChoiceField):
         super().__init__(*args, **kwargs)
 
 
-
+ 
 class FullDateTimeInput(forms.SplitDateTimeWidget):
     def __init__(self, attrs=None):
         super().__init__(

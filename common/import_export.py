@@ -10,12 +10,20 @@ from datetime import datetime
 
 
 def unique_column_name(obj):
+    init_values = {}
+    for field in obj.fields.values():
+        init_values[field.column_name] = 0
+    # print(f"init_values = {init_values}")
     seen = {}
     for field in obj.fields.values():
         original = field.column_name
         if original in seen:
             seen[original] += 1
-            field.column_name = f"{original}_{seen[original]}"
+            tmp_val = f"{original}_{seen[original]}"
+            if tmp_val in init_values:
+                init_values[tmp_val] += 1
+                tmp_val = f"{original}_{seen[original]}_{init_values[tmp_val]}"
+            field.column_name = tmp_val
         else:
             seen[original] = 1
 
@@ -34,7 +42,7 @@ def modify_widgets(obj, **kwargs):
             # print(f"get_export_resource_kwargs format_text = {format_text}")
             if format_text:
                 file_format = format_text
-    print(f"modify_widgets file_format = {file_format}")
+    # print(f"modify_widgets file_format = {file_format}")
     # print(f"modify_widgets obj_file_format = {obj_file_format}")
     # print(f"kwargs = {kwargs}")
     # print(f"obj.fields = {obj}")
@@ -149,11 +157,10 @@ class BaseModelReportResource(BaseModelResource):
     For a resource which has a specific model class and using in a reports.
     """
 
-    def __init__(self, cols_info, totals_info, list_display_export: list, *args, **kwargs):
+    def __init__(self, cols_info, totals_info, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.cols_info = cols_info
         self.totals_info = totals_info
-        self.list_display_export = list_display_export
 
     def before_export(self, queryset, **kwargs):
         super().before_export(queryset, **kwargs)
@@ -203,10 +210,9 @@ class BaseReportResource(BaseResource):
         if self.fields:
             self.export_order = list(self.fields.keys())
 
-    def __init__(self, cols_info, totals_info, list_display_export: list, *args, **kwargs):
-        self.cols_info = refine_cols(cols_info, list_display_export)
+    def __init__(self, cols_info, totals_info, *args, **kwargs):
+        self.cols_info = cols_info
         self.totals_info = totals_info
-        self.list_display_export = list_display_export
         self.form()
         super().__init__(*args, **kwargs)
 
@@ -279,27 +285,3 @@ def is_report_resource(resource):
     if (isinstance(resource, BaseModelReportResource) or isinstance(resource, BaseReportResource)):
         return True
     return False
-
-
-
-def refine_cols(cols_info, report_list_display_export):
-    """
-    refine cols_info according to report_list_display_export
-    """
-    if not report_list_display_export:
-        return cols_info
-    new_cols_info = []
-    for col in cols_info:
-        if col.col_name in report_list_display_export or col.col_name == "nn":
-            new_cols_info.append(col)
-    # for col in new_cols_info:
-    #     print(f"before col.position = {col.position} , col.col_name = {col.col_name}")
-    i = 1
-    for col in new_cols_info:
-        if col.position != i:
-            col.position = i
-        i+=1
-    # for col in new_cols_info:
-    #     print(f"after  col.position = {col.position} , col.col_name = {col.col_name}")
-    # print(f"new_cols_info = {new_cols_info}")
-    return new_cols_info
