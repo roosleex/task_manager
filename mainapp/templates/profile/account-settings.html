@@ -1,0 +1,30 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Account settings</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    {% include 'nav.html' %}
+    <h2 class="text-center">Account settings</h2>
+    <div class="container bg-white shadow-md p-1">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            <input class="btn btn-success" type="submit" value="Update user" >
+        </form>
+    </div>
+    <br>
+    <hr>
+    <div class="container bg-white shadow-md p-1">
+        <a href="{% url 'delete-account' %}" class="text-danger">Delete your account</a>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

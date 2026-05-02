@@ -12,3 +12,8 @@ class Task(BaseModel):
 
     def __str__(self) -> str:
         return self.title
+    
+
+class Profile(BaseModel):
+    profile_img = models.ImageField(null=True, blank=True, default="user-default-ava.jpg")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)

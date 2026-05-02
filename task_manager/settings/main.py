@@ -32,7 +32,7 @@ print(f"IS_TEST_CONFIG = {IS_TEST_CONFIG}")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-#print(f"BASE_DIR = {BASE_DIR}")
+print(f"BASE_DIR = {BASE_DIR}")
 
 
 # Quick-start development settings - unsuitable for production
@@ -227,8 +227,8 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-# STATIC_ROOT = env.str("STATIC_ROOT") #os.path.join(BASE_DIR, 'assets/static')
-# MEDIA_ROOT = env.str("MEDIA_ROOT") #os.path.join(BASE_DIR, 'assets/media')
+STATIC_ROOT = os.path.join(BASE_DIR, env.str("STATIC_ROOT"))
+MEDIA_ROOT = os.path.join(BASE_DIR, env.str("MEDIA_ROOT"))
 # STATICFILES_STORAGE is initialized at the top
 
 # This production code might break development mode, so we check whether we're in DEBUG mode
