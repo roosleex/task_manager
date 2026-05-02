@@ -49,6 +49,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 # DB_HOST = env.str("DB_HOST")
 # DB_PORT = env.str("DB_PORT")
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 # #
 # if IS_TEST_CONFIG:
 #     print(f"!!! TESTS ARE RUNNING !!!")

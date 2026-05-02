@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Task
-from .forms import TaskForm
+from .models import Task, Profile
+from .forms import TaskForm, UpdateProfileForm
 from accounts.forms import CustomUserCreationForm, LoginForm, CustomUserChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -26,10 +26,13 @@ def dashboard(request):
     user = request.user
     # print(f"user = {user.id}")
     tasks = Task.objects.all().filter(user=user, created__date=today)
+    profile = Profile.objects.get(user=user)
+    # print(f"profile = {profile}")
 
     context = {
         "tasks": tasks,
         "user": user,
+        "profile_img": profile.profile_img,
     }
     # print(f"dashboard tasks = {tasks}")
 
@@ -124,7 +127,9 @@ def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
+            current_user = form.save(commit=False)
             form.save()
+            profile = Profile.objects.create(user=current_user)
             messages.success(request, "Your registration is successful! Login now")
             return redirect("login")
     
@@ -159,13 +164,15 @@ def all_tasks(request):
 
 @login_required(login_url='login')
 def account_settings(request):
+    user = request.user
     if request.method == "POST":
-        user_form = CustomUserChangeForm(request.POST, instance=request.user)
+        user_form = CustomUserChangeForm(request.POST, instance=user)
         if user_form.is_valid():
             user_form.save()
             return redirect("dashboard")
         
-    user_form = CustomUserChangeForm(instance=request.user)
+    user_form = CustomUserChangeForm(instance=user)
+    profile = Profile.objects.get(user=user)
     
     # today = timezone.now().date()
     # user = request.user
@@ -174,6 +181,7 @@ def account_settings(request):
 
     context = {
         "user_form": user_form,
+        "profile_img": profile.profile_img,
     }
     # print(f"dashboard tasks = {tasks}")
 
@@ -192,3 +200,23 @@ def delete_account(request):
     }
 
     return render(request, "profile/delete-account.html", context)
+
+
+@login_required(login_url='login')
+def update_profile(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    form = UpdateProfileForm(instance=profile)
+
+    if request.method == "POST":
+        form = UpdateProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+        return redirect("update-profile")
+    
+    context = {
+        "form": form,
+        "profile_img": profile.profile_img,
+    }
+
+    return render(request, "profile/update-profile.html", context)

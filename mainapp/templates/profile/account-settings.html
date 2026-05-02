@@ -23,6 +23,13 @@
     <br>
     <hr>
     <div class="container bg-white shadow-md p-1">
+        <a href="{% url 'update-profile' %}" class="text-success">Update your profile</a>
+        <span class="m-4">
+            <img src="{{profile_img.url}}" alt="" style="width:200px;">
+        </span>
+    </div>
+    <hr>
+    <div class="container bg-white shadow-md p-1">
         <a href="{% url 'delete-account' %}" class="text-danger">Delete your account</a>
     </div>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

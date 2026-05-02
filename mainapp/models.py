@@ -15,5 +15,5 @@ class Task(BaseModel):
     
 
 class Profile(BaseModel):
-    profile_img = models.ImageField(null=True, blank=True, default="user-default-ava.jpg")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    profile_img = models.ImageField(null=True, blank=True, default="images/profile/default/user-default-ava.jpg", upload_to="images/profile/")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

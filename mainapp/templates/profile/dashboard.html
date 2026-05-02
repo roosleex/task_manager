@@ -12,6 +12,9 @@
     {% include 'nav.html' %}
     <div class="text-center">
         <h2>Today's Tasks</h2>
+        <div>
+            <img src="{{profile_img.url}}" alt="" style="width:100px;">
+        </div>
         <div class="d-flex flex-column align-items-center">
             {% if tasks %}
                 {% for task in tasks %}
