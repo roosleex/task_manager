@@ -106,6 +106,7 @@ INSTALLED_APPS = [
     # Third-party
     'crispy_forms',
     "crispy_bootstrap5",
+    "admin_honeypot",
 ]
 
 
@@ -285,7 +286,7 @@ INTERNAL_IPS = [
 # IS_CEMETERY_AREA_IN_USE = env.bool("IS_CEMETERY_AREA_IN_USE")
 
 # # admin url 1st part
-# ADMIN_URL1 = "cemadm"
+ADMIN_URL1 = env.str("ADMIN_URL1")
 
 #------------------------------------------------------------------------
 
